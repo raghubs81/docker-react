@@ -1,0 +1,19 @@
+# Select <image>:<version> as base image from https://hub.docker.com > Official Images
+#   - apline picks a vanilla (basic) version
+FROM node:alpine
+
+# WORKDIR -- The pwd in the container
+# Any relative operation we do (like copy) shall be relative to WORKDIR
+#   - "cp foo foo" ===> "cp ./foo <WORKDIR>/foo"
+#   - "cp foo foo" shall put the file foo from project dir in current machine to <WORKDIR>/foo in the container.
+WORKDIR /home/app
+
+# Copy package.json -- The dependency file descriptor for npm
+# Install dependencies (requires package.json)
+# Copy project files
+COPY package.json .
+RUN npm install
+COPY . .
+
+# Contianer startup command -- The command followed by options to be invoked by container after startup.
+CMD ["npm", "run", "start"]
