@@ -1,0 +1,17 @@
+sodo: required
+
+# Let Travis know the services that needs to be installed
+services:
+  - docker
+
+# This section has the commands to be executed before the test run (Similar to @BeforeTest in TestNG)
+# In this case, the dev image needs to be built before exeucting the tests.
+before_install:
+  - docker build -f Dockerfile.dev -t raghubs81/docker-react .
+
+# This section has the commands to run the test suite. If any command exists with non-zero status, 
+# the build is considered broken.
+# In this case, we could run "npm run test", but the command waits for user input after running the test
+# and hence shall never exit/finish.
+script:
+  - docker run -e CI=true raghubs81/docker-react npm run test
