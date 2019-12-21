@@ -14,4 +14,4 @@ before_install:
 # In this case, we could run "npm run test", but the command waits for user input after running the test
 # and hence shall never exit/finish.
 script:
-  - docker run raghubs81/docker-react npm run test -- --coverage 
+  - docker run -e CI=true raghubs81/docker-react npm run test -- --coverage 
