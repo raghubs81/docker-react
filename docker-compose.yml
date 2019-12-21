@@ -36,4 +36,4 @@ services:
     # The default start command for this container
     command:
       ["npm", "run", "test"]
-      
+
