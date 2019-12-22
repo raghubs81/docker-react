@@ -9,6 +9,10 @@ services:
     build:
       context: "."
       dockerfile: Dockerfile.dev
+
+    # Tag the image built  
+    image: raghubs81/docker-react-dev-web:1.0
+    container_name: "docker-react-dev-web"
     
     # <outside world port>:<container port> ==> Map outside world port to container port.
     ports: 
@@ -28,6 +32,10 @@ services:
     build:
       context: "."
       dockerfile: Dockerfile.dev
+
+    # Tag the image built  
+    image: raghubs81/docker-react-dev-test:1.0
+    container_name: "docker-react-dev-test"
 
     volumes:
       - /home/app/node_modules
