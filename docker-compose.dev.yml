@@ -1,0 +1,39 @@
+version: "3"
+
+# A custom name of the service/container
+# In the below example, we have two containers 
+#   - web : Has instructions to build/create/start a node web-app for the dev environment.
+services: 
+  
+  web:
+    build:
+      context: "."
+      dockerfile: Dockerfile.dev
+    
+    # <outside world port>:<container port> ==> Map outside world port to container port.
+    ports: 
+      - "8801:8801"
+    
+    # <outside world path>:<container path> 
+    #   - Map outside world path to container. 
+    #   - Any changes to the <outside world path> will reflect in the container -- Useful during development.
+    # <container path>                    
+    #   - These are container private files. Do NOT map this to anything outside container.
+    volumes:
+      - /home/app/node_modules
+      - .:/home/app
+
+  tests:
+    
+    build:
+      context: "."
+      dockerfile: Dockerfile.dev
+
+    volumes:
+      - /home/app/node_modules
+      - .:/home/app
+
+    # The default start command for this container
+    command:
+      ["npm", "run", "test"]
+
